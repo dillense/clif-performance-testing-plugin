@@ -20,19 +20,20 @@
  */
 package jenkins.model;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 import hudson.model.FreeStyleProject;
 import hudson.model.Item;
 import hudson.model.ItemGroup;
-import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
-public class FakeTest {
+class FakeTest {
 
 	@Test
-	public void canFakeAndResetGlobals() {
+	void canFakeAndResetGlobals() {
 		assertNull(Jenkins.getInstance());
 		Jenkins jenkins = Fake.install();
 
@@ -44,8 +45,9 @@ public class FakeTest {
 		assertNull(Jenkins.getInstance());
 	}
 
-
-	public void canThenCreateFreestyleProject() {
+	@Test
+	@Disabled
+	void canThenCreateFreestyleProject() {
 		Jenkins jenkins = Fake.install();
 		try {
 			FreeStyleProject project = new FreeStyleProject(
@@ -53,11 +55,8 @@ public class FakeTest {
 					"bar"
 			);
 			assertEquals(jenkins, project.getParent());
-		}
-		finally {
+		} finally {
 			Fake.uninstall();
 		}
 	}
-
-
 }
